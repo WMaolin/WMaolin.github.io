@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Couple Love Space</title>
+<script>
+    let count;
+    let lastClickedDate;
+    localStorage.setItem('count', 1275)
+    window.onload = function() {
+      count = parseInt(localStorage.getItem('count')) || 0;
+      document.getElementById('daysCount').innerText = count;
+      lastClickedDate = localStorage.getItem('lastClickedDate');
+      const today = new Date().toDateString();
+  
+      if(lastClickedDate === today) {
+        document.getElementById('heart').style.pointerEvents = 'none';
+      }
+    };
+  
+    function incrementCount() {
+      const newDate = new Date().toDateString();
+      if(lastClickedDate !== newDate) {
+        count++;
+        document.getElementById('daysCount').innerText = count;
+        localStorage.setItem('count', count);
+        localStorage.setItem('lastClickedDate', newDate);
+        document.getElementById('heart').classList.remove('heartbeat');
+        document.getElementById('heart').style.pointerEvents = 'none';
+      }
+    }
+
+    function clearLastClicked() {
+        localStorage.removeItem('lastClickedDate');
+        localStorage.removeItem('count');
+        document.getElementById('heart').classList.add('heartbeat');
+    }
+  </script>
+  
+  
+  
+<style>
+  body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Replace 'background.jpg' with your image file name */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  #heart {
+    color: red;
+    cursor: pointer;
+    user-select: none;
+    font-size: 48px;
+    transition: transform 0.2s;
+  }
+
+  #heart:active {
+    transform: scale(1.1);
+  }
+
+  #names, #daysCount {
+    background: rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+</style>
+</head>
+<body>
+    <h1 id="names">W <span id="heart" onclick="incrementCount()">&#10084;</span> K</h1>
+    <h2>Together for <span id="daysCount"></span> days</h2>
+    <!-- <button onclick="clearLastClicked()">Clear Last Clicked</button> -->
+</body>
+</html>
