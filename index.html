@@ -7,7 +7,7 @@
 <script>
     let count;
     let lastClickedDate;
-    localStorage.setItem('count', 1275)
+    // localStorage.setItem('count', 1275)
     window.onload = function() {
       count = parseInt(localStorage.getItem('count')) || 1275;
       document.getElementById('daysCount').innerText = count;
@@ -33,11 +33,8 @@
     function clearLastClicked() {
         localStorage.removeItem('lastClickedDate');
         localStorage.removeItem('count');
-        document.getElementById('heart').classList.add('heartbeat');
     }
   </script>
-  
-  
   
 <style>
   body {
