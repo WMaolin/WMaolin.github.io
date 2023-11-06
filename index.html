@@ -9,7 +9,7 @@
     let lastClickedDate;
     localStorage.setItem('count', 1275)
     window.onload = function() {
-      count = parseInt(localStorage.getItem('count')) || 0;
+      count = parseInt(localStorage.getItem('count')) || 1275;
       document.getElementById('daysCount').innerText = count;
       lastClickedDate = localStorage.getItem('lastClickedDate');
       const today = new Date().toDateString();
@@ -20,13 +20,12 @@
     };
   
     function incrementCount() {
-      const newDate = new Date().toDateString();
-      if(lastClickedDate !== newDate) {
+      const today = new Date().toDateString();
+      if(lastClickedDate !== today) {
         count++;
         document.getElementById('daysCount').innerText = count;
         localStorage.setItem('count', count);
-        localStorage.setItem('lastClickedDate', newDate);
-        document.getElementById('heart').classList.remove('heartbeat');
+        localStorage.setItem('lastClickedDate', today);
         document.getElementById('heart').style.pointerEvents = 'none';
       }
     }
@@ -74,6 +73,6 @@
 <body>
     <h1 id="names">W <span id="heart" onclick="incrementCount()">&#10084;</span> K</h1>
     <h2>Together for <span id="daysCount"></span> days</h2>
-    <!-- <button onclick="clearLastClicked()">Clear Last Clicked</button> -->
+    <button onclick="clearLastClicked()">Clear Last Clicked</button>
 </body>
 </html>
